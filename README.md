@@ -8,7 +8,7 @@ A simple registration website where visitors can view registered users and regis
 ### Use Cases ###
 
 + View registered users
-+ Sort
++ Search
 + Signup
 
 
