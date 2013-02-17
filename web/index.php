@@ -7,7 +7,17 @@ include '../service/DateTimeService.php';
 try {
     $connManager = new ConnectionManager();
     $userDQ = new UserDQ(@$connManager->getConnection());
-    $users = $userDQ->retrieveAll();
+    
+    if (isset ($_GET['searchq'])) {
+        
+        // sanitize search query
+        $searchq = filter_var($_GET['searchq'], FILTER_SANITIZE_STRING);
+        $users = $userDQ->retrieveAllByDisplayName($searchq);
+    }
+    else {
+        $users = $userDQ->retrieveAll();
+    }
+    
     $dts = new DateTimeService();
     include "../view/homepage.php";
 }

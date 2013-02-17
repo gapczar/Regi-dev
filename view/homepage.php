@@ -21,6 +21,12 @@
             <h2>{ Welcome to WebCamp login or signup above. }</h2>
         </header>
         <div class="main"  role="main">
+            <br/>
+            <form action="" method="GET">
+                <input type="text" name="searchq" placeholder="User name">
+                <input type="submit" value="Search">
+            </form>
+            <br/>
             <ul class="user-list">
                 <?php foreach ($users as $user) :?>
                 <li>

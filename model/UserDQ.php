@@ -11,7 +11,7 @@ class UserDQ
      * 
      * @var string
      */
-    private $tblName = "user";
+    private $tblName = "`user`";
     
     /**
      * User table columns
@@ -43,6 +43,24 @@ class UserDQ
     public function retrieveAll()
     {
         $stmt = $this->pdo->query("SELECT $this->columns FROM $this->tblName");
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll();
+    }
+    
+    /**
+     * Retrieve all users having a display name similar with the
+     * specified display name.
+     * 
+     * @param string $displayName
+     * 
+     * @return array
+     */
+    public function retrieveAllByDisplayName($displayName)
+    {
+        $stmt = $this->pdo->prepare("SELECT $this->columns FROM $this->tblName " .
+                                    "WHERE $this->tblName.`display_name` LIKE :display_name");
+        $stmt->bindValue(':display_name', "%$displayName%");
+        $stmt->execute();
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         return $stmt->fetchAll();
     }
