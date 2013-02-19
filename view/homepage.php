@@ -14,11 +14,11 @@
     <body class="magic-container">
         <header>
             <nav>
-                <a class="home" href="">Home</a>
-                <a class="signup" href="">Signup</a>
+                <a class="home" href="/">Home</a>
+                <a class="signup" href="signup.php">Signup</a>
             </nav>
             <h1><span>GAPLabs</span>WebCamp Registration</h1>
-            <h2>{ Welcome to WebCamp login or signup above. }</h2>
+            <h2>Welcome to WebCamp</h2>
         </header>
         <div class="main"  role="main">
             <br/>
@@ -38,12 +38,17 @@
                             <?php echo $user['real_name']; ?>
                             <em><?php echo $user['display_name']; ?></em>
                         </p>
-                        <p class="email"><strong>Email: </strong><?php echo $user['email']; ?></p>
-                        <p class="location"><strong>Location: </strong><?php echo $user['location']; ?></p>
-                        <p class="birhtdate"><strong>Age: </strong><?php echo $dts->computeAge(new DateTime($user['date_of_birth'])); ?></p>
+                        <p class="email">
+                            <strong>Email:</strong> <?php echo $user['email']; ?>
+                        </p>
+                        <p class="location">
+                            <strong>Location:</strong> <?php echo $user['location']; ?>
+                        </p>
+                        <p class="birhtdate">
+                            <strong>Age:</strong><?php echo $dts->computeAge(new DateTime($user['date_of_birth'])); ?>
+                        </p>
                         <p class="bio">
-                            <strong>Bio:</strong>
-                            <?php echo $user['bio']; ?>
+                            <strong>Bio:</strong> <?php echo $user['bio']; ?>
                         </p>
                     </div>
                 </li>

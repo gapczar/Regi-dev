@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Date operations utility class.
+ * DateTime operations utility class.
  * 
  */
 class DateTimeService

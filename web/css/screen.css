@@ -138,7 +138,7 @@ header h2 {
 }
 .user-list .actions a {
   background-color: #ddd;
-  color: #444;
+  color: #444444;
   font-weight: bold;
   padding: 3px 8px;
   -webkit-border-radius: 8px;
@@ -189,4 +189,44 @@ header h2 {
 }
 .user-details .name em {
   font-weight: normal;
+}
+
+.form {
+  padding: 40px 0 80px;
+}
+.form legend {
+  font-size: 21px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+.form li {
+  margin-bottom: 15px;
+}
+.form li label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.form li input, .form li textarea {
+  font-family: "Open Sans", sans-serif;
+  padding: 5px;
+  font-size: 16px;
+  width: 600px;
+}
+.form .email input, .form .dob input, .form .username input, .form .password input {
+  width: 300px;
+}
+.form .submit {
+  border: none;
+  background-color: #00aeef;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 6px 10px;
+  color: white;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
 }
