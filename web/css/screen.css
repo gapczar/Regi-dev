@@ -230,3 +230,22 @@ header h2 {
   -o-border-radius: 8px;
   border-radius: 8px;
 }
+
+.search {
+    float: right;
+    margin-right: 30px;
+    margin-top: -4px;
+}
+
+.search form input[type=submit] {
+    font-size: 16px;
+}
+
+form li.photo label {
+    margin-bottom: 15px;
+}
+
+#user_photo {
+    padding-top: 0px;
+    font-size: 16px;
+}

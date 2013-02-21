@@ -16,17 +16,17 @@
             <nav>
                 <a class="home" href="/">Home</a>
                 <a class="signup" href="signup.php">Signup</a>
+                <div class="search">
+                    <form action="" method="GET">
+                        <input type="text" name="searchq" placeholder="User name">
+                        <input type="submit" value="Search">
+                    </form>
+                </div>
             </nav>
             <h1><span>GAPLabs</span>WebCamp Registration</h1>
             <h2>Welcome to WebCamp</h2>
         </header>
         <div class="main"  role="main">
-            <br/>
-            <form action="" method="GET">
-                <input type="text" name="searchq" placeholder="User name">
-                <input type="submit" value="Search">
-            </form>
-            <br/>
             <ul class="user-list">
                 <?php foreach ($users as $user) :?>
                 <li>
