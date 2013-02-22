@@ -31,7 +31,7 @@
                 <?php foreach ($users as $user) :?>
                 <li>
                     <div class="user-photo">
-                        <img width="150" height="150" src="<?php echo $user['photo'];?>" alt="No Photo">
+                        <img width="150" height="150" src="/images/<?php echo $user['photo'];?>" alt="No Photo">
                     </div>
                     <div class="user-details">
                         <p class="name">

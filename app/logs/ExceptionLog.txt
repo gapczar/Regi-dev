@@ -1,2 +1,1 @@
-Feb 22, 2013 14:29:43    SQLSTATE[42000] [1049] Unknown database 'regi'
-Feb 22, 2013 14:34:50    SQLSTATE[42000] [1049] Unknown database 'regi'
+

@@ -50,8 +50,6 @@ class UserValidator
                 $this->errors['email'] = 'Make sure input email is in right format';
             }
         }
-
-        return $params;
     }
 
     public function getErrors()

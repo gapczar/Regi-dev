@@ -70,9 +70,9 @@ class UserDQ
      *
      * @param array $params
      */
-    public function save($params = array())
+    public function save($params = array(), $isNew = true)
     {
-        if(isset($params['isNew']) && $params['isNew']) {
+        if($isNew) {
             $this->addRow($params);
         } else {
             $this->editRow($params);
@@ -112,10 +112,11 @@ class UserDQ
      */
     private function editRow($params = array())
     {
-        $sql = "
-            UPDATE ".$tableName." SET ".implode(', ', $setvalues)."
-            WHERE id = :id
-        ";
+        //todo: not yet done
+        // $sql = "
+        //     UPDATE ".$tableName." SET ".implode(', ', $setvalues)."
+        //     WHERE id = :id
+        // ";
     }
 
     /** 
