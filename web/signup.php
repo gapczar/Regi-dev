@@ -2,6 +2,7 @@
 
 include '../app/ConnectionManager.php';
 include '../model/UserDQ.php';
+include '../validator/UserValidator.php';
 
 try {
     
@@ -11,7 +12,15 @@ try {
         echo "<br><br><pre>" . print_r($_FILES, true) . "</pre>";
         exit;
         
-        $userData = $_POST['user'];
+        $userValidator = new UserValidator($_POST['user']);
+        $userData = $userValidator->filterData();
+
+        if(false === $userData) {
+            include "../view/signup.php";
+        } else {
+            
+        }
+        
         $userPhoto = $_FILES['user'];
         
         // TODO sanitize, validate, save

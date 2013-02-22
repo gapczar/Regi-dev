@@ -9,7 +9,6 @@ try {
     $userDQ = new UserDQ(@$connManager->getConnection());
     
     if (isset ($_GET['searchq'])) {
-        
         // sanitize search query
         $searchq = filter_var($_GET['searchq'], FILTER_SANITIZE_STRING);
         $users = $userDQ->retrieveAllByDisplayName($searchq);

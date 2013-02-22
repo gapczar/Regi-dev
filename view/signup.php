@@ -1,3 +1,22 @@
+<?php
+
+try {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        
+    }
+} catch(Exception $e) {
+     // log exception
+    $log = date('M d, Y H:i:s') . '    ' . $ex->getMessage() . "\n";
+    file_put_contents('../app/logs/ExceptionLog.txt', $log, FILE_APPEND);
+    
+    // render error page
+    header("HTTP/1.1 500 Internal Server Error");
+    include "../view/error500.php";
+}
+
+?>
+
+
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
