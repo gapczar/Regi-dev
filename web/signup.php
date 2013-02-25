@@ -1,55 +1,54 @@
 <?php
 
 require_once '../app/ConnectionManager.php';
-require_once '../model/UserDQ.php';
+require_once '../model/UserDM.php';
 require_once '../validator/UserValidator.php';
-require_once '../validator/PhotoValidator.php';
 
 try {
     
+    // initialize userData
+    $user = array (
+        'display_name' => '',
+        'real_name' => '',
+        'location' => '',
+        'email' => '',
+        'date_of_birth' => '',
+        'bio' => '',
+    );
+    
     if ('POST' === $_SERVER['REQUEST_METHOD']) {
-        $userValidator = new UserValidator($_POST['user']);
-        $userData = $userValidator->filterUserData();
-        $errors = array();
-
-        if(false === $userData) {
-            $errors = $userData->getErrors();
-        } else {
-            if(strlen($_FILES['user']['name']['photo']) > 0) {
-                //save photo
-                $photoValidator = new PhotoValidator();
-                $photoStatus = $photoValidator->validatePhoto($_FILES['user']);
-               
-                if($photoStatus) {
-                    //move file
-                    $targetPath = '/images';
-                    $path = realpath(dirname(__FILE__))."/$targetPath";
-
-                    if (!file_exists($path)) {  
-                        mkdir($path, 0777, true);
-                    }
-                       
-                    if (move_uploaded_file($_FILES['user']['tmp_name']['photo'], $path.'/'.$_FILES['user']['name']['photo'])){
-                        $userData['photo'] = $_FILES['user']['name']['photo'];
-                    }  else {
-                        $errors['photo'] = $photoValidator->getErrorMessage(); 
-                    }
-
-                } else {
-                    $errors['photo'] = $photoValidator->getErrorMessage(); 
-                }
-            } 
-
-            if(empty($errors)) {
-                //save to database
-                $connManager = new ConnectionManager();
-                $userDQ = new UserDQ(@$connManager->getConnection());
-                $userDQ->save($userData);
-
-                header("Location: index.php"); 
-                exit;
+        
+        $validator = new UserValidator();
+        $validator->bindData($_POST['user'], $_FILES['user']);
+        
+        if ($validator->isValid()) {
+            
+            // save photo using a unique filename
+            $photo = $validator->getPhoto();
+            $base = pathinfo($_FILES['user']['name']['photo'], PATHINFO_FILENAME);
+            $time = time();
+            $ext = pathinfo($_FILES['user']['name']['photo'], PATHINFO_EXTENSION);
+            $filename = $base . "_$time." . $ext;
+            
+            $isUploadSuccess = @move_uploaded_file($photo['tmp_name']['photo'], 'images/' . $filename);
+            if (!$isUploadSuccess) {
+                throw new Exception('Failed moving image!');
             }
+            
+            $userData = $validator->getSanitizedData();
+            $userData['photo'] = $filename;
+            
+            $connManager = new ConnectionManager();
+            $userDM = new UserDM(@$connManager->getConnection());
+            $userDM->insert($userData);
+            $userDM->insert($userData);
+            
+            header("Location: index.php");
+            exit;
         }
+        
+        $user = $validator->getUserData();
+        $errors = $validator->getErrors();
     }
     
     include "../view/signup.php";

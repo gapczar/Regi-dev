@@ -44,8 +44,8 @@
                         <p class="location">
                             <strong>Location:</strong> <?php echo $user['location']; ?>
                         </p>
-                        <p class="birhtdate">
-                            <strong>Age:</strong><?php echo $dts->computeAge(new DateTime($user['date_of_birth'])); ?>
+                        <p class="birthdate">
+                            <strong>Age:</strong> <?php echo !empty ($user['date_of_birth'])? $dts->computeAge(new DateTime($user['date_of_birth'])): ''; ?>
                         </p>
                         <p class="bio">
                             <strong>Bio:</strong> <?php echo $user['bio']; ?>
