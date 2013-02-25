@@ -33,7 +33,15 @@ try {
                 $ext = pathinfo($_FILES['user']['name']['photo'], PATHINFO_EXTENSION);
                 $filename = $base . "_$time." . $ext;
                 
-                $isUploadSuccess = @move_uploaded_file($photo['tmp_name']['photo'], 'images/' . $filename);
+                if (!is_dir('images')) {
+                    $oldMask = umask(0);   // permission issue workaround
+                    if (!mkdir('images', 0777)) {
+                        throw new Exception('Images directory does not exist and cannot be created!');
+                    }
+                    umask($oldMask);
+                }
+                
+                $isUploadSuccess = move_uploaded_file($photo['tmp_name']['photo'], 'images/' . $filename);
                 if (!$isUploadSuccess) {
                     throw new Exception('Failed moving image!');
                 }
