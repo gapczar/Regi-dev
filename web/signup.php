@@ -23,24 +23,27 @@ try {
         
         if ($validator->isValid()) {
             
+            $userData = $validator->getSanitizedData();
+            
             // save photo using a unique filename
             $photo = $validator->getPhoto();
-            $base = pathinfo($_FILES['user']['name']['photo'], PATHINFO_FILENAME);
-            $time = time();
-            $ext = pathinfo($_FILES['user']['name']['photo'], PATHINFO_EXTENSION);
-            $filename = $base . "_$time." . $ext;
-            
-            $isUploadSuccess = @move_uploaded_file($photo['tmp_name']['photo'], 'images/' . $filename);
-            if (!$isUploadSuccess) {
-                throw new Exception('Failed moving image!');
+            if (4 != $photo['error']['photo']) {
+                $base = pathinfo($_FILES['user']['name']['photo'], PATHINFO_FILENAME);
+                $time = time();
+                $ext = pathinfo($_FILES['user']['name']['photo'], PATHINFO_EXTENSION);
+                $filename = $base . "_$time." . $ext;
+                
+                $isUploadSuccess = @move_uploaded_file($photo['tmp_name']['photo'], 'images/' . $filename);
+                if (!$isUploadSuccess) {
+                    throw new Exception('Failed moving image!');
+                }
+                
+                // append filename to user data
+                $userData['photo'] = $filename;
             }
-            
-            $userData = $validator->getSanitizedData();
-            $userData['photo'] = $filename;
             
             $connManager = new ConnectionManager();
             $userDM = new UserDM(@$connManager->getConnection());
-            $userDM->insert($userData);
             $userDM->insert($userData);
             
             header("Location: index.php");

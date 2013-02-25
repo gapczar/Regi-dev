@@ -87,7 +87,7 @@ class UserDM
                                                   NULL;
         $this->columnValues['real_name']        = !empty ($userData['real_name'])?
                                                   $userData['real_name']:
-                                                  NULL;
+                                                  '';
         $this->columnValues['location']         = !empty ($userData['location'])?
                                                   $userData['location']:
                                                   NULL;
